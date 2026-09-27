@@ -1,0 +1,128 @@
+// -*- mode: jsonc -*-
+// Waybar configuration
+// Edit: pkill -x waybar && waybar &
+{
+    // "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 32, // Waybar height (to be removed for auto height)
+    "spacing": 6, // Gaps between modules (6px)
+
+    // Choose the order of the modules.
+    // To add a module: write its name in one of the three lists below.
+    // To change how it looks: add a block with the SAME name further down.
+    "modules-left": ["mpris", "clock", "hyprland/workspaces"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": [
+    "custom/gpu", "cpu","pulseaudio", "backlight","battery",
+    "custom/notification", "tray",
+    "custom/lock", "custom/power"],
+
+    // Other modules you can drop into "modules-right" if you want them:
+    // "network", "bluetooth", "idle_inhibitor", "power-profiles-daemon"
+
+    // Modules configuration
+
+    "custom/launcher": {
+        "format": "",
+        "on-click": "rofi -show drun"
+    },
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "format-icons": {
+            "default": "●",
+            "1": "1", "2": "2", "3": "3", "4": "4", "5": "5",
+            "urgent": "●"
+        }
+    },
+
+    "mpris": {
+        "format": " {artist} - {title}",
+        "format-paused": " {artist} - {title}",
+        "max-length": 40,
+        "player": "spotify"
+    },
+
+    "custom/gpu": {
+        "format": " {}%",
+        "exec": "cat /sys/class/drm/card*/device/gpu_busy_percent 2>/dev/null",
+        "interval": 3
+    },
+
+    "cpu": {
+        "format": " {}%"
+    },
+
+    "memory": {
+        "format": " {}%"
+    },
+
+    "temperature": {
+        "format": " {temperatureC}°C",
+        "critical-threshold": 80
+    },
+
+    "disk": {
+        "format": " {free}",
+        "path": "/",
+        "interval": 30
+    },
+
+    "pulseaudio": {
+        "format": " {volume}%",
+        "format-muted": "󰝟 mudo",
+        "on-click": "pavucontrol"
+    },
+
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": ["", "", "", "", "", ""]
+    },
+
+    "battery": {
+        "format": " {capacity}%",
+        "format-charging": "󰕾 {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+        "states": {
+            "warning": 30,
+            "critical": 15
+        }
+    },
+
+    "clock": {
+        "format": " {:%H:%M}"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 6
+    },
+
+    "custom/notification": {
+        "format": "",
+        "on-click": "swaync-client --toggle-panel"
+    },
+
+    "custom/lock": {
+        "format": "",
+        "on-click": "hyprlock"
+    },
+
+    "custom/power": {
+    "format": "⏻",
+    "on-click": "wlogout"
+},
+
+"hyprland/window": {
+    "format": "{}",
+    "separate-outputs": true,
+    "rewrite": {
+        "^~$": ""
+    }
+},
+}
+
+
+
+

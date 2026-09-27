@@ -1,0 +1,105 @@
+/* Waybar
+   Troque as cores no bloco abaixo e reinicie: pkill -x waybar && waybar &
+   O seletor de um modulo = o ID dele na config, com "#".
+   Ex.: "custom/gpu" vira "#custom-gpu".
+   "JetBrainsMono Nerd Font Mono" e obrigatorio para os icones aparecerem. */
+
+@define-color fundo    #453254;
+@define-color texto    #0F0D10;
+@define-color destaque #E0B875;
+@define-color critico  #D2674A;
+@define-color borda    #49382B;
+
+* {
+    font-family: "JetBrainsMono Nerd Font Mono", monospace;
+    font-size: 16px;
+    font-weight: 700;
+    color: @texto;
+}
+
+window#waybar {
+    background:transparent;
+}
+#custom-gpu,
+#cpu,
+#memory,
+#disk,
+#tray,
+#mpris,
+#pulseaudio,
+#backlight,
+#battery,
+#custom-notification,
+#clock,
+#window,
+#custom-lock,
+#custom-power {
+    background-color: #644E75;
+    border-radius: 100px;
+    padding: 0 10px;
+    min-height: 10px;
+}
+
+
+/* Workspaces: bloco container */
+#workspaces {
+    background: rgba(30, 30, 46, 0.6);
+    margin: 2px 4px;
+    padding: 4px 6px;
+    border-radius: 20px;
+    min-height: 28px;
+}
+
+/* Botao base: as inativas sao pílula #412F50, VAZIAS (sem numero).
+   Mantem a largura, so achata a altura. */
+#workspaces button {
+    background: #412F50;
+    color: transparent;
+    border-radius: 20px;
+    min-width: 40px;
+    min-height: 16px;
+    padding: 0;
+    margin: 2px;
+}
+
+/* O texto fica num <label> dentro do botao e a cor do botao nao herda
+   pra ele. Por isso "color: transparent" no botao sozinho nao esconde
+   o numero: tem que aplicar a cor no label. */
+#workspaces button label {
+    color: transparent;
+    font-size: 10px;
+}
+
+/* Workspace ativa: pílula #654F76, com o numero. Mesma largura da base. */
+#workspaces button.active {
+    background: #654F76;
+    color: #FFFFFF;
+    min-width: 40px;
+    min-height: 20px;
+    padding: 0;
+    border-radius: 20px;
+}
+#workspaces button.active label {
+    color: #0F0D0F;
+    font-size: 14px;
+}
+
+/* Hover */
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#workspaces button.urgent { color: @critico; }
+#workspaces button.urgent label { color: @critico; }
+
+/* Bateria: laranja abaixo de 30%, vermelha abaixo de 15%. */
+#battery.warning  { color: @destaque; }
+#battery.critical { color: @critico; }
+
+#workspace button.urgent {
+   background-color: #654F76;
+   color: #0E0D0F;
+   border-radius: 16px;
+   min-width: 50px;
+   background-size: 400% 400%;
+}
